@@ -4,8 +4,8 @@ env:
   TARGET: testsite-unittest
 on:
   push:
-    branches:
-      - ${{ env.SOURCE }}
+    # branches:
+    #   - ${{ env.SOURCE }}
   workflow_dispatch:
 jobs:
   build-pelican:
