@@ -1,11 +1,10 @@
 name: Build a Pelican Website
 env:
-  SOURCE: testsite
+  SOURCE: &SOURCE testsite
   TARGET: testsite-unittest
 on:
   push:
-    # branches:
-    #   - ${{ env.SOURCE }}
+    branches: [ *SOURCE ]
   workflow_dispatch:
 jobs:
   build-pelican:
