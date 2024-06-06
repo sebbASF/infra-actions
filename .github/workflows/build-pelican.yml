@@ -1,29 +1,12 @@
-name: Build a Pelican Website
-env:
-  SOURCE: testsite
-  TARGET: testsite-unittest
+name: test temp
 on:
   push:
-    branches: [ 'testsite' ]
   workflow_dispatch:
 jobs:
   build-pelican:
-    env:
-      UNIT_TEST_A: This is a test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the test site
-        uses: actions/checkout@v4
-        with: 
-          ref: ${{ env.SOURCE }}
-
-      - name: Should create/update ${{ env.TARGET }}
-        uses: apache/infrastructure-actions/pelican@main
+      - name: Should fail
+        uses: sebbASF/infra-actions/pelican@temp
         with:
-          destination: ${{ env.TARGET }}
-          gfm: 'true'
-      - name: Test output
-        run: |
-          git checkout ${{ env.TARGET }}
-          # Check that GFM was used
-          grep '<p><del>Hi</del> Hello, <del>there</del> world!</p>' output/index.html
+          destination: xyz
