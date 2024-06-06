@@ -28,6 +28,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Temp
+      shell: bash
+      run: |
+        ls -la ${{ github.action_path }}
+        ls -la ${{ github.action_path }}/..
+        ls -la ${{ github.action_path }}/../..
+        false
     - name: Install Pelican
       # Install needs to run in separate shell so stdout is restored
       run: |
