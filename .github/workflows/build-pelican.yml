@@ -19,8 +19,6 @@ jobs:
       - name: Test output
         if: always()
         run: |
-          export
-          pwd
           git checkout ${{ env.TARGET }}
           # Check that GFM was used
           grep '<p><del>Hi</del> Hello, <del>there</del> world!</p>' output/index.html

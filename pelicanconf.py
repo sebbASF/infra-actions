@@ -1,4 +1,4 @@
-# import os
+import os
 import sys
 import datetime
 # Basic information about the site.
@@ -16,22 +16,26 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
-print(f"PLUGIN_PATHS: {PLUGIN_PATHS}",file=sys.stderr)
-print(f"sys.argv: {sys.argv}",file=sys.stderr)
-# # Test all the plugins
-# names=[]
-# pdir='self/pelican/plugins'
-# try:
-#     for f in os.listdir(pdir):
-#         if f.endswith('.py'):
-#             names.append(os.path.splitext(f)[0])
-#         if os.path.isdir(os.path.join(pdir,f)):
-#             names.append(f)
-# except FileNotFoundError:
-#     print(f"NAK: {pdir}")
-# PLUGINS = names
-PLUGINS = []
-# print(PLUGINS)
+PLUGINS=[]
+# This file is imported twice
+if len(sys.argv) > 3:
+    print(f"sys.argv: {sys.argv}",file=sys.stderr)
+    over = sys.argv[3] # PLUGIN_PATHS=["plugins", "/home/runner/work/_actions/..."]
+    print(over, file=sys.stderr)
+    pdir = over.split('=')[1].split(',')[-1].strip()
+    print(pdir, file=sys.stderr)
+    # Test all the plugins
+    names=[]
+    try:
+        for f in os.listdir(pdir):
+            if f.endswith('.py'):
+                names.append(os.path.splitext(f)[0])
+            if os.path.isdir(os.path.join(pdir,f)):
+                names.append(f)
+    except FileNotFoundError:
+        pass
+    PLUGINS = names
+print(PLUGINS, file=sys.stderr)
 ASF_RUN = [ '/bin/bash show_environ.sh start' ]
 ASF_POSTRUN = [ '/bin/bash show_environ.sh end' ]
 
