@@ -16,7 +16,7 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
-PLUGINS=['missing']
+PLUGINS=['gfm','missing'] # gfm must be loaded before asfreader
 # This file is imported twice
 if len(sys.argv) > 3:
     # print(f"sys.argv: {sys.argv}",file=sys.stderr)
@@ -27,7 +27,7 @@ if len(sys.argv) > 3:
     # Test all the plugins
     names=PLUGINS
     try:
-        for f in os.listdir(pdir):
+        for f in sorted(os.listdir(pdir)):
             if f.endswith('.py'):
                 names.append(os.path.splitext(f)[0])
             if os.path.isdir(os.path.join(pdir,f)):
