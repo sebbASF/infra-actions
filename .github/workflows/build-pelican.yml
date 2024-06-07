@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Should fail
-        uses: sebbASF/infra-actions/pelican@temp
+        uses: sebbASF/infra-actions/pelican@dockerfile
         with:
           destination: xyz
+          debug: 'true'
