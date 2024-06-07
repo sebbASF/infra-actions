@@ -16,7 +16,7 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
-PLUGINS=['gfm','missing'] # gfm must be loaded before asfreader
+PLUGINS=['gfm'] # gfm must be loaded before asfreader
 # This file is imported twice
 if len(sys.argv) > 3:
     # print(f"sys.argv: {sys.argv}",file=sys.stderr)
