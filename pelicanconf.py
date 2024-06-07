@@ -1,4 +1,5 @@
 import os
+import sys
 import datetime
 # Basic information about the site.
 SITENAME = 'Apache Infra Actions'
@@ -15,14 +16,19 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
+print(PLUGIN_PATHS)
+print(sys.argv)
 # Test all the plugins
 names=[]
 pdir='self/pelican/plugins'
-for f in os.listdir(pdir):
-    if f.endswith('.py'):
-        names.append(os.path.splitext(f)[0])
-    if os.path.isdir(os.path.join(pdir,f)):
-        names.append(f)
+try:
+    for f in os.listdir(pdir):
+        if f.endswith('.py'):
+            names.append(os.path.splitext(f)[0])
+        if os.path.isdir(os.path.join(pdir,f)):
+            names.append(f)
+except FileNotFoundError:
+    print(f"NAK: {pdir}")
 PLUGINS = names
 print(PLUGINS)
 ASF_RUN = [ '/bin/bash show_environ.sh start' ]
