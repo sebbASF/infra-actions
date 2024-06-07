@@ -15,9 +15,7 @@ jobs:
         uses: apache/infrastructure-actions/pelican@main
         with:
           destination: ${{ env.TARGET }}
-          gfm: 'false'
       - name: Test output
-        if: always()
         run: |
           git checkout ${{ env.TARGET }}
           # Check that GFM was used

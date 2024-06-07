@@ -16,16 +16,16 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
-PLUGINS=[]
+PLUGINS=['missing']
 # This file is imported twice
 if len(sys.argv) > 3:
-    print(f"sys.argv: {sys.argv}",file=sys.stderr)
+    # print(f"sys.argv: {sys.argv}",file=sys.stderr)
     over = sys.argv[3] # PLUGIN_PATHS=["plugins", "/home/runner/work/_actions/..."]
-    print(over, file=sys.stderr)
+    # print(over, file=sys.stderr)
     pdir = eval(over.split('=')[1])[-1] # get array and extract last value
-    print(pdir, file=sys.stderr)
+    # print(pdir, file=sys.stderr)
     # Test all the plugins
-    names=[]
+    names=PLUGINS
     try:
         for f in os.listdir(pdir):
             if f.endswith('.py'):
