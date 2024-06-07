@@ -16,8 +16,8 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
-print(f"PLUGIN_PATHS: {PLUGIN_PATHS}")
-print(f"sys.argv: {sys.argv}")
+print(f"PLUGIN_PATHS: {PLUGIN_PATHS}",file=sys.stderr)
+print(f"sys.argv: {sys.argv}",file=sys.stderr)
 # # Test all the plugins
 # names=[]
 # pdir='self/pelican/plugins'
