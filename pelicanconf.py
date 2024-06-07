@@ -1,4 +1,4 @@
-import os
+# import os
 import sys
 import datetime
 # Basic information about the site.
@@ -16,21 +16,22 @@ TIMEZONE = 'UTC'
 THEME = 'simple' # a built-in theme
 # Specify location of plugins, and which to use
 PLUGIN_PATHS = [ 'plugins' ] # For local plugins
-print(PLUGIN_PATHS)
-print(sys.argv)
-# Test all the plugins
-names=[]
-pdir='self/pelican/plugins'
-try:
-    for f in os.listdir(pdir):
-        if f.endswith('.py'):
-            names.append(os.path.splitext(f)[0])
-        if os.path.isdir(os.path.join(pdir,f)):
-            names.append(f)
-except FileNotFoundError:
-    print(f"NAK: {pdir}")
-PLUGINS = names
-print(PLUGINS)
+print(f"PLUGIN_PATHS: {PLUGIN_PATHS}")
+print(f"sys.argv: {sys.argv}")
+# # Test all the plugins
+# names=[]
+# pdir='self/pelican/plugins'
+# try:
+#     for f in os.listdir(pdir):
+#         if f.endswith('.py'):
+#             names.append(os.path.splitext(f)[0])
+#         if os.path.isdir(os.path.join(pdir,f)):
+#             names.append(f)
+# except FileNotFoundError:
+#     print(f"NAK: {pdir}")
+# PLUGINS = names
+PLUGINS = []
+# print(PLUGINS)
 ASF_RUN = [ '/bin/bash show_environ.sh start' ]
 ASF_POSTRUN = [ '/bin/bash show_environ.sh end' ]
 
