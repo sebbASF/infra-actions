@@ -13,9 +13,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Should create/update ${{ env.TARGET }}
         # uses: apache/infrastructure-actions/pelican@main
-        uses: pelican@main
+        uses: sebbASF/infra-actions/pelican@main
         with:
           destination: ${{ env.TARGET }}
+          debug: 'true'
       - name: Test output
         run: |
           git checkout ${{ env.TARGET }}
