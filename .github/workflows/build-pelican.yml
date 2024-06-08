@@ -17,6 +17,7 @@ jobs:
         with:
           destination: ${{ env.TARGET }}
           debug: 'true'
+          fail: 'errors'
       - name: Test output
         run: |
           git checkout ${{ env.TARGET }}
