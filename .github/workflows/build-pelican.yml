@@ -12,7 +12,8 @@ jobs:
       - name: Checkout the test site
         uses: actions/checkout@v4
       - name: Should create/update ${{ env.TARGET }}
-        uses: apache/infrastructure-actions/pelican@main
+        # uses: apache/infrastructure-actions/pelican@main
+        uses: sebbASF/infra-actions/pelican@Infe
         with:
           destination: ${{ env.TARGET }}
           gfm: 'true'
