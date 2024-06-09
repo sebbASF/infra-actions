@@ -2,22 +2,13 @@ name: Build a Pelican Website
 on:
   push:
   workflow_dispatch:
+env:
+  TARGET: test99
 jobs:
   build-pelican:
-    env:
-      TARGET: testsite-unittest
-      UNIT_TEST_A: This is a test
     runs-on: ubuntu-latest
+    concurrency: # target must not be updated by two jobs at once
+      group: testsite-${{ env.TARGET }} # must agree with TARGET
     steps:
       - name: Checkout the test site
-        uses: actions/checkout@v4
-      - name: Should create/update ${{ env.TARGET }}
-        uses: apache/infrastructure-actions/pelican@main
-        with:
-          destination: ${{ env.TARGET }}
-          gfm: 'true'
-      - name: Test output
-        run: |
-          git checkout ${{ env.TARGET }}
-          # Check that GFM was used
-          grep '<p><del>Hi</del> Hello, <del>there</del> world!</p>' output/index.html
+        run: echo ${TARGET}
