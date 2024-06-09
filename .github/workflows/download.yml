@@ -1,6 +1,8 @@
 name: Download
 on:
   push:
+    paths:
+      - '**/download.yml'
   workflow_dispatch:
 jobs:
   job1:

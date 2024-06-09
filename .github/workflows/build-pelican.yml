@@ -1,6 +1,8 @@
 name: Build a Pelican Website
 on:
   push:
+    paths:
+      - '**/build-pelican.yml'
   workflow_dispatch:
 jobs:
   job1:

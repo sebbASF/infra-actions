@@ -1,0 +1,16 @@
+name: Stash Up
+on:
+  push:
+    paths:
+      - '**/stashup.yml'
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: assignUser/stash/save@v1
+      with:
+        key: 'cache-key'
+        path: '.'
+
