@@ -2,26 +2,25 @@ name: Build a Pelican Website
 on:
   push:
   workflow_dispatch:
-env:
-  TARGET: test99
 jobs:
-  build-pelican1:
+  job1:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
+    steps:
+      - id: step1
+        run: echo "test=hello" >> "$GITHUB_OUTPUT"
+      - id: step2
+        run: echo "test=world" >> "$GITHUB_OUTPUT"
+  job2:
     runs-on: ubuntu-latest
     concurrency: # target must not be updated by two jobs at once
-      group: testsite-${TARGET} # must agree with TARGET
+      group: testsite-${{needs.job1.outputs.output1}} # must agree with TARGET
+    needs: job1
     steps:
-      - name: Checkout the test site
-        run: |
-          echo ${TARGET}
-          sleep 10
-          echo Done
-  build-pelican2:
-    runs-on: ubuntu-latest
-    concurrency: # target must not be updated by two jobs at once
-      group: testsite-${TARGET} # must agree with TARGET
-    steps:
-      - name: Checkout the test site
-        run: |
-          echo ${TARGET}
-          sleep 10
-          echo Done
+      - env:
+          OUTPUT1: ${{needs.job1.outputs.output1}}
+          OUTPUT2: ${{needs.job1.outputs.output2}}
+        run: echo "$OUTPUT1 $OUTPUT2"
