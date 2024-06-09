@@ -8,19 +8,20 @@ jobs:
     # Map a step output to a job output
     outputs:
       output1: ${{ steps.step1.outputs.test }}
-      output2: ${{ steps.step2.outputs.test }}
     steps:
       - id: step1
-        run: echo "test=hello" >> "$GITHUB_OUTPUT"
-      - id: step2
-        run: echo "test=world" >> "$GITHUB_OUTPUT"
+        run: |
+          echo ${{ github.ref_name }}
+          echo "test=$(echo ${{ github.ref_name }} | tr / -)" >> "$GITHUB_OUTPUT"
   job2:
+    needs: job1
     runs-on: ubuntu-latest
     concurrency: # target must not be updated by two jobs at once
       group: testsite-${{needs.job1.outputs.output1}} # must agree with TARGET
-    needs: job1
     steps:
       - env:
           OUTPUT1: ${{needs.job1.outputs.output1}}
-          OUTPUT2: ${{needs.job1.outputs.output2}}
-        run: echo "$OUTPUT1 $OUTPUT2"
+        run: |
+          echo "$OUTPUT1"
+          echo ${{needs.job1.outputs.output1}}
+          echo ${{ github.ref_name }}
