@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
-          name: artifact1
+          name: artifact2
           path: .
   # job2:
   #   needs: job1
