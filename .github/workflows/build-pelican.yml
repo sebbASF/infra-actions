@@ -14,10 +14,11 @@ jobs:
           echo ${{ github.ref_name }}
           echo "test=$(echo ${{ github.ref_name }} | tr / -)" >> "$GITHUB_OUTPUT"
       - id: step2
+        uses: actions/checkout@v4
         uses: actions/upload-artifact@v4
         with:
           name: artifact1
-          path: .github/workflows
+          path: .
   # job2:
   #   needs: job1
   #   runs-on: ubuntu-latest
