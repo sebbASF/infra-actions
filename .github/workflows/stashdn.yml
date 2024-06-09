@@ -1,0 +1,19 @@
+name: Stash Dn
+on:
+  push:
+    paths:
+      - '**/stashdn.yml'
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Before
+      run: ls -l
+    - uses: assignUser/stash/restore@v1
+      with:
+        key: 'cache-key'
+        path: 'xx'
+    - name: After
+      run: ls -l
+
