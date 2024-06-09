@@ -1,0 +1,15 @@
+name: Download
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifact1
+          path: .
+      - name: Check
+        run: |
+          ls -lR
