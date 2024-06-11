@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Should create/update ${{ env.TARGET }}
         # uses: apache/infrastructure-actions/pelican@main
-        uses: sebbASF/infra-actions/pelican@no-build-gfm
+        uses: sebbASF/infra-actions/pelican@no-rebuild-gfm
         with:
           destination: ${{ env.TARGET }}
           gfm: 'true'
