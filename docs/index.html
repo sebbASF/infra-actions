@@ -81,13 +81,17 @@ async function getData(user, repo) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    alert(error + ` for ${user}/${repo}`);
+    return {artifacts: []};
   }
 }
 
 const params = new URL(document.location).searchParams;
 const user = params.get('user') || window.location.hostname.replace(/\.github.*/,'');
 const repo = params.get('repo') || window.location.pathname.split('/')[1];
+const repo_name = document.getElementById('repo_name');
+repo_name.innerHTML=`${user}/${repo}`;
+
 getData(user, repo).then(data => {
 
   const parts = [];
@@ -104,8 +108,6 @@ getData(user, repo).then(data => {
     parts.push(`<td><a href="${runurl}">Run</a></td>`);
     parts.push('</tr>');
   });
-  const repo_name = document.getElementById('repo_name');
-  repo_name.innerHTML=`${user}/${repo}`;
   const container = document.getElementById('container');
   container.innerHTML = parts.join("\n");
 });
