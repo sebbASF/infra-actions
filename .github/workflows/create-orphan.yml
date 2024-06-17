@@ -1,4 +1,4 @@
-name: Test the Pelican build action
+name: Create an orphan branch
 on:
   push:
     paths:
@@ -17,4 +17,4 @@ jobs:
       - name: Create the orphan
         uses: sebbASF/infra-actions/create-orphan@create-orphan
         with:
-          destination: ${{ inputs.destination || 'orphan2' }}
+          destination: ${{ inputs.destination || 'gh-pages' }}
