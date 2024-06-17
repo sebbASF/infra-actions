@@ -1,1 +1,18 @@
 
+name: Create an orphan branch
+description: "Create an orphan branch"    
+inputs:
+  destination:
+    description: "New branch name"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Create orphan branch
+      shell: bash
+      run: | 
+        git config --global user.email "private@infra.apache.org"
+        git config --global user.name "Create orphan branch (action)"
+        git switch --orphan ${{ inputs.destination }}
+        git commit -m "Initialise empty branch"
+        git push -u origin ${{ inputs.destination }}
