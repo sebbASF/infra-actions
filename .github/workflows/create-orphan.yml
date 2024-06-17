@@ -17,4 +17,4 @@ jobs:
       - name: Create the orphan
         uses: sebbASF/infra-actions/create-orphan@create-orphan
         with:
-          destination: ${{ inputs.destination || 'orphan1' }}
+          destination: ${{ inputs.destination || 'orphan2' }}
