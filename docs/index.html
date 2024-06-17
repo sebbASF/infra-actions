@@ -82,8 +82,8 @@ async function getData(user, repo) {
 }
 
 const params = new URL(document.location).searchParams;
-const user = params.get('user') || 'apache';
-const repo = params.get('repo') || 'infrastructure-actions';
+const user = params.get('user') || window.location.hostname.replace(/\.github.*/,'');
+const repo = params.get('repo') || window.location.pathname.split('/')[1];
 getData(user, repo).then(data => {
 
   const parts = [];
@@ -100,9 +100,6 @@ getData(user, repo).then(data => {
     parts.push(`<td><a href="${runurl}">Run</a></td>`);
     parts.push('</tr>');
   });
-  parts.push(window.location.hostname);
-  parts.push('<br>');
-  parts.push(window.location.pathname);
   const repo_name = document.getElementById('repo_name');
   repo_name.innerHTML=`${user}/${repo}`;
   const container = document.getElementById('container');
