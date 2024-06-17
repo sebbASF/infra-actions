@@ -10,13 +10,18 @@ runs:
   steps:
     - name: Create orphan branch
       shell: bash
-      run: | 
+      run: |
+        if [[ -z ${{inputs.destination}} ]]
+        then
+          echo "Branch name '${{inputs.destination}}' must not be empty!"
+          exit 1
+        fi
         git config --global user.email "private@infra.apache.org"
         git config --global user.name "Create orphan branch (action)"
         # Check if the branch already exists (without needing to update local checkout)
-        if git ls-remote --heads -q --exit-code origin ${{ inputs.destination }}
+        if git ls-remote --heads -q --exit-code origin "${{ inputs.destination }}"
         then
-          echo "Branch ${{inputs.destination}} already exists!"
+          echo "Branch '${{inputs.destination}}' already exists!"
           exit 1
         fi
         git switch --orphan ${{ inputs.destination }}
