@@ -9,7 +9,7 @@ on:
       destination:
         default: orphan2
 jobs:
-  ophan-test:
+  orphan-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout current repo
@@ -17,4 +17,4 @@ jobs:
       - name: Create the orphan
         uses: sebbASF/infra-actions/create-orphan@create-orphan
         with:
-          destination: ${{ inputs.destination }}
+          destination: ${{ inputs.destination || 'orphan1' }}
