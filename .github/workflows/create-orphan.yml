@@ -5,13 +5,16 @@ on:
       - 'create-orphan/**'
       - '.github/workflows/create-orphan.yml'
   workflow_dispatch:
+    inputs:
+      destination:
+        default: orphan2
 jobs:
   ophan-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout current repo
         uses: actions/checkout@v4
-      - name: creat the orphan
+      - name: Create the orphan
         uses: sebbASF/infra-actions/create-orphan@create-orphan
         with:
-          destination: orphan1
+          destination: ${{ inputs.destination }}

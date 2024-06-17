@@ -13,7 +13,8 @@ runs:
       run: | 
         git config --global user.email "private@infra.apache.org"
         git config --global user.name "Create orphan branch (action)"
-        if git checkout ${{ inputs.destination }} # does it exist?
+        # Check if the branch already exists (without needing to update local checkout)
+        if git ls-remote --heads -q --exit-code origin ${{ inputs.destination }}
         then
           echo "Branch ${{inputs.destination}} already exists!"
           exit 1
