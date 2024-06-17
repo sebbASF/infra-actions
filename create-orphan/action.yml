@@ -11,7 +11,7 @@ runs:
     - name: Create orphan branch
       shell: bash
       run: |
-        if [[ -z ${{inputs.destination}} ]]
+        if [ -z "${{inputs.destination}}" ]
         then
           echo "Branch name '${{inputs.destination}}' must not be empty!"
           exit 1
