@@ -13,6 +13,11 @@ runs:
       run: | 
         git config --global user.email "private@infra.apache.org"
         git config --global user.name "Create orphan branch (action)"
+        if git checkout ${{ inputs.destination }} # does it exist?
+        then
+          echo "Branch ${{inputs.destination}} already exists!"
+          exit 1
+        fi
         git switch --orphan ${{ inputs.destination }}
         git commit --allow-empty -m "Initialise empty branch"
         git push -u origin ${{ inputs.destination }}
