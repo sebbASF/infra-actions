@@ -1,0 +1,17 @@
+name: Test the Pelican build action
+on:
+  push:
+    paths:
+      - 'create-orphan/**'
+      - '.github/workflows/create-orphan.yml'
+  workflow_dispatch:
+jobs:
+  ophan-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v4
+      - name: creat the orphan
+        uses: sebbASF/infra-actions/create-orphan@create-orphan
+        with:
+          destination: orphan1
