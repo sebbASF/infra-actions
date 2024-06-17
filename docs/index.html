@@ -50,7 +50,7 @@
     <table>
         <thead>
             <tr>
-            <td>Name (Download URL)</td>
+            <td>Name (URL)</td>
             <td>Bytes</td>
             <td>Created</td>
             <td>Updated</td>
@@ -97,7 +97,7 @@ getData(user, repo).then(data => {
   const parts = [];
   data.artifacts.forEach(artifact => {
     parts.push('<tr>');
-    parts.push(`<td><a href="${artifact.archive_download_url}">${artifact.name}</a></td>`);
+    parts.push(`<td><a href="${artifact.url}">${artifact.name}</a></td>`);
     parts.push(`<td>${artifact.size_in_bytes}</td>`);
     parts.push(`<td>${artifact.created_at}</td>`);
     parts.push(`<td>${artifact.updated_at}</td>`);
