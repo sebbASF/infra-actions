@@ -14,5 +14,5 @@ runs:
         git config --global user.email "private@infra.apache.org"
         git config --global user.name "Create orphan branch (action)"
         git switch --orphan ${{ inputs.destination }}
-        git commit -m "Initialise empty branch"
+        git commit --allow-empty -m "Initialise empty branch"
         git push -u origin ${{ inputs.destination }}
