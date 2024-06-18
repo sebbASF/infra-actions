@@ -51,7 +51,9 @@ runs:
         export GFM_VERSION=0.28.3.gfm.12
         echo "GFM_VERSION=$GFM_VERSION" >>$GITHUB_ENV
         # arbitrary, but should contain version
-        echo "LIBCMARKDIR=/opt/pelican-asf/gfm-${GFM_VERSION}" >>$GITHUB_ENV
+        export LIBCMARKDIR=/opt/pelican-asf/gfm-${GFM_VERSION}
+        mkdir -p $LIBCMARKDIR
+        echo "LIBCMARKDIR=$LIBCMARKDIR" >>$GITHUB_ENV
     - name: Fetch cached GFM
       if: ${{ inputs.gfm == 'true' }}
       uses: actions/cache@v4
@@ -63,9 +65,6 @@ runs:
     - name: fetch and build libcmark-gfm.so
       if: ${{ inputs.gfm == 'true' }}
       shell: bash
-      env:
-        WORKDIR: /opt/pelican-asf # where to build GFM
-        GFM_VERSION: '0.28.3.gfm.12' # ensure we agree with build-cmark.sh script
       run: |
         # Does the GFM build already exist?
         if [[ -f $LIBCMARKDIR/libcmark-gfm.so ]]
