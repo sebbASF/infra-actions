@@ -57,7 +57,8 @@ runs:
       run: |
         time sudo apt install cmark-gfm
         # How is one supposed to know this?
-        echo "LIBCMARKDIR=/usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3" >>$GITHUB_ENV
+        # echo "LIBCMARKDIR=/usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3" >>$GITHUB_ENV
+        echo "LIBCMARKDIR=/usr/lib/x86_64-linux-gnu" >>$GITHUB_ENV
         # # Does the GFM build already exist?
         # if [[ -n $LIBCMARKDIR && -d $LIBCMARKDIR ]]
         # then
