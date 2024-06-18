@@ -55,10 +55,13 @@ runs:
       #   WORKDIR: /opt/pelican-asf # where to build GFM
       #   GFM_VERSION: '0.28.3.gfm.12' # ensure we agree with build-cmark.sh script
       run: |
-        time sudo apt install cmark-gfm
-        # How is one supposed to know this?
-        # echo "LIBCMARKDIR=/usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3" >>$GITHUB_ENV
-        echo "LIBCMARKDIR=/usr/lib/x86_64-linux-gnu" >>$GITHUB_ENV
+        mkdir -p /opt/pelican-asf/libcmark-gfm
+        time sudo apt-get install -y cmark-gfm=0.29.0.gfm.3 # must agree with link command below
+        # How is one supposed to know where to find the file?
+        ln -s /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3 /opt/pelican-asf/libcmark-gfm/libcmark-gfm.so
+        echo "LIBCMARKDIR=/opt/pelican-asf/libcmark-gfm" >>$GITHUB_ENV
+
+        ln -s 
         # # Does the GFM build already exist?
         # if [[ -n $LIBCMARKDIR && -d $LIBCMARKDIR ]]
         # then
