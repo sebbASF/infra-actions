@@ -58,6 +58,8 @@ runs:
         mkdir -p /opt/pelican-asf/libcmark-gfm
         time sudo apt-get install -y cmark-gfm=0.29.0.gfm.3-3 # must agree with link command below (not necessarily identical!)
         # How is one supposed to know where to find the file?
+        ls -ld /usr/lib/x86_64-linux-gnu/libcmark-gfm*
+        ls -l /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3
         ln -s /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3 /opt/pelican-asf/libcmark-gfm/libcmark-gfm.so
         echo "LIBCMARKDIR=/opt/pelican-asf/libcmark-gfm" >>$GITHUB_ENV
 
