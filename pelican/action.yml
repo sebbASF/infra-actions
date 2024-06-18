@@ -51,19 +51,16 @@ runs:
     - name: fetch and build libcmark-gfm.so
       if: ${{ inputs.gfm == 'true' }}
       shell: bash
-      # env:
-      #   WORKDIR: /opt/pelican-asf # where to build GFM
+      env:
+        WORKDIR: /opt/pelican-asf/libcmark-gfm # where to put GFM
       #   GFM_VERSION: '0.28.3.gfm.12' # ensure we agree with build-cmark.sh script
       run: |
-        mkdir -p /opt/pelican-asf/libcmark-gfm
+        mkdir -p $WORKDIR
         time sudo apt-get install -y cmark-gfm=0.29.0.gfm.3-3 # must agree with link command below (not necessarily identical!)
         # How is one supposed to know where to find the file?
-        ls -ld /usr/lib/x86_64-linux-gnu/libcmark-gfm*
-        ls -l /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3
-        ln -s /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3 /opt/pelican-asf/libcmark-gfm/libcmark-gfm.so
-        echo "LIBCMARKDIR=/opt/pelican-asf/libcmark-gfm" >>$GITHUB_ENV
+        ln -s /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3 $WORKDIR/libcmark-gfm.so
+        echo "LIBCMARKDIR=$WORKDIR" >>$GITHUB_ENV
 
-        ln -s 
         # # Does the GFM build already exist?
         # if [[ -n $LIBCMARKDIR && -d $LIBCMARKDIR ]]
         # then
