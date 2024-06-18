@@ -32,8 +32,7 @@ jobs:
           echo $TARGET
           git branch -D $TARGET
           git push origin --delete $TARGET
-          git branch -a | grep ${{ env.TARGET }}
-          true
+          git branch -a | grep ${{ env.TARGET }} || true
       - name: Should create ${{ env.TARGET }}
         uses: ./self/pelican
         with:
