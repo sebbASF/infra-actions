@@ -36,6 +36,7 @@ runs:
       shell: bash
       # Install needs to run in separate shell so stdout is restored
       run: |
+        time {
         (
           test "${{ inputs.debug }}" == 'true' || exec >/dev/null
           pip3 install pelican==${{ inputs.version }} markdown bs4 ezt requests
@@ -47,6 +48,7 @@ runs:
         then
           pip3 list # This a long list
         fi
+        }
         # This belongs in a separate step?
         export GFM_VERSION=0.28.3.gfm.12
         echo "GFM_VERSION=$GFM_VERSION" >>$GITHUB_ENV
