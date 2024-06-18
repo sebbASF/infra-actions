@@ -47,6 +47,17 @@ runs:
         then
           pip3 list # This a long list
         fi
+        # This belongs in a separate step?
+        export GFM_VERSION=0.28.3.gfm.12
+        echo "GFM_VERSION=$GFM_VERSION" >>$GITHUB_ENV
+        # arbitrary, but should contain version
+        echo "LIBCMARKDIR=/opt/pelican-asf/gfm-${GFM_VERSION}" >>$GITHUB_ENV
+    - name: Fetch cached GFM
+      if: ${{ inputs.gfm == 'true' }}
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.LIBCMARKDIR }}
+        key: gfm-lib-${{ env.GFM_VERSION }}
 
     # If the site uses Github Flavored Markdown, use this build branch
     - name: fetch and build libcmark-gfm.so
@@ -57,12 +68,15 @@ runs:
         GFM_VERSION: '0.28.3.gfm.12' # ensure we agree with build-cmark.sh script
       run: |
         # Does the GFM build already exist?
-        if [[ -n $LIBCMARKDIR && -d $LIBCMARKDIR ]]
+        if [[ -f $LIBCMARKDIR/libcmark-gfm.so ]]
         then
           echo "Already have GFM binary at $LIBCMARKDIR, skipping build"
           exit 0 # nothing more to do in this step
         fi
+
+        # GFM binary not found, need to build it
         {
+          echo "Creating GFM binary in ${LIBCMARKDIR}"
           # disable stdout unless debug is on
           if [ "${{ inputs.debug }}" == 'true' ]
           then
@@ -70,16 +84,10 @@ runs:
           else
             exec >/dev/null
           fi
-          # Don't pollute site checkout
-          mkdir -p $WORKDIR
-          pushd $WORKDIR
-            # build the code and define LIBCMARKDIR
-            bash ${{ github.action_path }}/build-cmark.sh $GFM_VERSION | grep "export LIBCMARKDIR" >/tmp/libcmarkdir.$$
-            source /tmp/libcmarkdir.$$
-          popd
-          # ensure LIBCMARKDIR is defined for subsequent steps
-          echo "LIBCMARKDIR=${LIBCMARKDIR}"  >> $GITHUB_ENV
+          # build the code and define LIBCMARKDIR under $WORKDIR
+          bash ${{ github.action_path }}/build-cmark.sh $GFM_VERSION $LIBCMARKDIR
         }
+
 
     - name: Generate website from markdown
       shell: bash
