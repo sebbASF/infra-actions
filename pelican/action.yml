@@ -59,6 +59,7 @@ runs:
         time sudo apt-get install -y cmark-gfm=0.29.0.gfm.3-3 # must agree with link command below (not necessarily identical!)
         # How is one supposed to know where to find the file?
         ln -s /usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3 $WORKDIR/libcmark-gfm.so
+        ln -s /usr/lib/x86_64-linux-gnu/libcmark-gfm-extensions.so.0.29.0.gfm.3 $WORKDIR/libcmark-gfmextensions.so
         echo "LIBCMARKDIR=$WORKDIR" >>$GITHUB_ENV
 
         # # Does the GFM build already exist?
