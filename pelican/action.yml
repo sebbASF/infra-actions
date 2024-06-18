@@ -32,22 +32,22 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # - name: Install Pelican
-    #   shell: bash
-    #   # Install needs to run in separate shell so stdout is restored
-    #   run: |
-    #     (
-    #       test "${{ inputs.debug }}" == 'true' || exec >/dev/null
-    #       pip3 install pelican==${{ inputs.version }} markdown bs4 ezt requests
-    #     )
-    #     python3 -V
-    #     echo "Pelican version:"
-    #     pelican --version
-    #     if [ "${{ inputs.debug }}" == 'true' ]
-    #     then
-    #       pip3 list # This a long list
-    #     fi
-    # If the site uses Github Flavored Markdown, use this build branch
+    - name: Install Pelican
+      shell: bash
+      # Install needs to run in separate shell so stdout is restored
+      run: |
+        (
+          test "${{ inputs.debug }}" == 'true' || exec >/dev/null
+          pip3 install pelican==${{ inputs.version }} markdown bs4 ezt requests
+        )
+        python3 -V
+        echo "Pelican version:"
+        pelican --version
+        if [ "${{ inputs.debug }}" == 'true' ]
+        then
+          pip3 list # This a long list
+        fi
+    If the site uses Github Flavored Markdown, use this build branch
     - name: fetch and build libcmark-gfm.so
       if: ${{ inputs.gfm == 'true' }}
       shell: bash
@@ -56,8 +56,8 @@ runs:
       #   GFM_VERSION: '0.28.3.gfm.12' # ensure we agree with build-cmark.sh script
       run: |
         time sudo apt install cmark-gfm
-        find /usr/lib -name 'libcmark-gfm*' -ls
-        exit 1
+        # How is one supposed to know this?
+        echo "LIBCMARKDIR=/usr/lib/x86_64-linux-gnu/libcmark-gfm.so.0.29.0.gfm.3" >>$GITHUB_ENV
         # # Does the GFM build already exist?
         # if [[ -n $LIBCMARKDIR && -d $LIBCMARKDIR ]]
         # then
