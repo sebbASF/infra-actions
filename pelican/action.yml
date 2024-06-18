@@ -55,7 +55,7 @@ runs:
       #   WORKDIR: /opt/pelican-asf # where to build GFM
       #   GFM_VERSION: '0.28.3.gfm.12' # ensure we agree with build-cmark.sh script
       run: |
-        time apt install cmark-gfm
+        time sudo apt install cmark-gfm
         # # Does the GFM build already exist?
         # if [[ -n $LIBCMARKDIR && -d $LIBCMARKDIR ]]
         # then
