@@ -15,26 +15,30 @@ jobs:
         include:
           - gfm: 'true'
             testbranch: testsite
-            coe: false
+            buildshouldfail: false
           - gfm: 'true'
             testbranch: testsite
             gfm_version: '0.28.3.gfm.12' # This is the earliest that will build
-            coe: false
+            buildshouldfail: false
           - gfm: 'true'
             testbranch: testsite
             gfm_version: '0.29.0.gfm.13' # latest
-            coe: false
+            buildshouldfail: false
           - gfm: 'false'
-            testbranch: testsite-nogfm
-            coe: false
+            testbranch: testsitenogfm
+            buildshouldfail: false
           - gfm: 'false'
-            testbranch: testsite-nogfm
+            testbranch: testsitenogfm
             gfm_version: 'not-a-version'
-            coe: false
+            buildshouldfail: false
           - gfm: 'true'
-            testbranch: testsite-nogfm
+            testbranch: testsite
             gfm_version: 'not-a-version'
-            coe: true
+            buildshouldfail: true # Try to build a non-existent version
+          - gfm: 'true'
+            testbranch: testsite
+            gfm_version: '0.28.0.gfm.11'
+            buildshouldfail: true # Try to build an obsolete version
     steps:
       - name: Checkout the test site
         uses: actions/checkout@v4
@@ -50,7 +54,7 @@ jobs:
 
       - name: Build (no publish)
         id: build
-        continue-on-error: ${{ matrix.coe }}
+        continue-on-error: ${{ matrix.buildshouldfail }}
         uses: ./self/pelican
         with:
           destination: output
@@ -62,7 +66,7 @@ jobs:
           UNIT_TEST_A: This is UNIT_TEST_A
 
       - name: Check build failed when expected
-        if:  ${{ matrix.coe }}
+        if:  ${{ matrix.buildshouldfail }}
         run: |
           echo "${{ toJSON(steps.build) }}"
           test '${{ steps.build.outcome }}' != 'success'
