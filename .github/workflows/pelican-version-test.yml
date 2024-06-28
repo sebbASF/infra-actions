@@ -22,7 +22,11 @@ jobs:
             coe: false
           - gfm: 'true'
             testbranch: testsite
-            gfm_version: '0.28.3.gfm.20'
+            gfm_version: '0.27.1.gfm.0' # earliest
+            coe: false
+          - gfm: 'true'
+            testbranch: testsite
+            gfm_version: '0.29.0.gfm.13' # latest
             coe: false
           - gfm: 'false'
             testbranch: testsite-nogfm
