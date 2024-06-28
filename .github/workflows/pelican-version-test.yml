@@ -1,0 +1,55 @@
+name: Test GFM version option
+on:
+  push:
+    paths:
+      - 'pelican/action.yml'
+      - 'pelican/build-cmark.sh'
+      - '.github/workflows/pelican-version-test.yml'
+  workflow_dispatch:
+jobs:
+  version-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - gfm: 'true'
+          - gfm: 'true'
+            gfm_version: '0.28.3.gfm.12'
+          - gfm: 'true'
+            gfm_version: '0.28.3.gfm.20'
+          - gfm: 'false'
+          - gfm: 'false'
+            gfm_version: 'not-a-version'
+    steps:
+      - name: Checkout the test site
+        uses: actions/checkout@v4
+        with:
+          ref: testsite
+      - name: Ignore the action checkout
+        run: |
+          echo "self/" >> .git/info/exclude
+      - name: Checkout self
+        uses: actions/checkout@v4
+        with:
+          path: self
+
+      - name: Build (no publish)
+        uses: ./self/pelican
+        with:
+          destination: output
+          publish: 'false'
+          gfm: ${{ matrix.gfm }}
+          gfm_version: ${{ matrix.gfm_version }}
+
+      - name: Check output
+        run: |
+          test -f output/index.html # check output was created
+          if [ ${{ matrix.gfm }} == 'true' ]
+          then
+            # Check that GFM was used
+            grep '<p><del>Hi</del> Hello, <del>there</del> world!</p>' output/index.html
+          else
+            # Check that GFM was NOT used
+            ! grep '<p><del>Hi</del> Hello, <del>there</del> world!</p>' output/index.html
+          fi
+  
