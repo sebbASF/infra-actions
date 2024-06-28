@@ -18,15 +18,7 @@ jobs:
             coe: false
           - gfm: 'true'
             testbranch: testsite
-            gfm_version: '0.28.3.gfm.12'
-            coe: false
-          - gfm: 'true'
-            testbranch: testsite
-            gfm_version: '0.28.0.gfm.11' # early
-            coe: false
-          - gfm: 'true'
-            testbranch: testsite
-            gfm_version: '0.28.0.gfm.10' # early
+            gfm_version: '0.28.3.gfm.12' # This is the earliest that will build
             coe: false
           - gfm: 'true'
             testbranch: testsite
