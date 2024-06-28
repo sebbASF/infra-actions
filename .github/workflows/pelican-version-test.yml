@@ -10,9 +10,9 @@ jobs:
   version-test:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: [false]
+      fail-fast: false
       matrix:
-        coe: false
+        coe: [false]
         include:
           - gfm: 'true'
             testbranch: testsite
