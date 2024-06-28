@@ -22,7 +22,11 @@ jobs:
             coe: false
           - gfm: 'true'
             testbranch: testsite
-            gfm_version: '0.27.1.gfm.0' # earliest
+            gfm_version: '0.27.1.gfm.1' # early
+            coe: false
+          - gfm: 'true'
+            testbranch: testsite
+            gfm_version: '0.27.1.gfm.4' # early
             coe: false
           - gfm: 'true'
             testbranch: testsite
