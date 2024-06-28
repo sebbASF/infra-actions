@@ -12,21 +12,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        coe: [false]
         include:
           - gfm: 'true'
             testbranch: testsite
+            coe: false
           - gfm: 'true'
             testbranch: testsite
             gfm_version: '0.28.3.gfm.12'
+            coe: false
           - gfm: 'true'
             testbranch: testsite
             gfm_version: '0.28.3.gfm.20'
+            coe: false
           - gfm: 'false'
             testbranch: testsite-nogfm
+            coe: false
           - gfm: 'false'
             testbranch: testsite-nogfm
             gfm_version: 'not-a-version'
+            coe: false
           - gfm: 'true'
             testbranch: testsite-nogfm
             gfm_version: 'not-a-version'
