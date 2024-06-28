@@ -48,14 +48,13 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
         with:
-          name: build-output
+          name: build-output-${{ matrix.gfm }}-${{ matrix.gfm_version }}
           path: output
           retention-days: 1
 
       - name: Check output
         run: |
           test -f output/index.html # check output was created
-          cat output/index.html
           if [ '${{ matrix.gfm }}' == 'true' ]
           then
             # Check that GFM was used
