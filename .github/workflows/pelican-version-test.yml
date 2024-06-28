@@ -18,9 +18,11 @@ jobs:
             gfm_version: '0.28.3.gfm.12'
           - gfm: 'true'
             gfm_version: '0.28.3.gfm.20'
-          # - gfm: 'false'
-          # - gfm: 'false'
-          #   gfm_version: 'not-a-version'
+          - gfm: 'false'
+          - gfm: 'false'
+            gfm_version: 'not-a-version'
+          - gfm: 'true'
+            gfm_version: 'not-a-version'
     steps:
       - name: Checkout the test site
         uses: actions/checkout@v4
