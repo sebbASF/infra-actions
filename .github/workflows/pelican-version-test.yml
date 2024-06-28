@@ -12,6 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        testsite: [testsite]
         include:
           - gfm: 'true'
           - gfm: 'true'
@@ -19,15 +20,18 @@ jobs:
           - gfm: 'true'
             gfm_version: '0.28.3.gfm.20'
           - gfm: 'false'
+            testsite: testsite-nogfm
           - gfm: 'false'
+            testsite: testsite-nogfm
             gfm_version: 'not-a-version'
           - gfm: 'true'
+            testsite: testsite-nogfm
             gfm_version: 'not-a-version'
     steps:
       - name: Checkout the test site
         uses: actions/checkout@v4
         with:
-          ref: testsite
+          ref: ${{ matrix.testsite }}
       - name: Ignore the action checkout
         run: |
           echo "self/" >> .git/info/exclude
