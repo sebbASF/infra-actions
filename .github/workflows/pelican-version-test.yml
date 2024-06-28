@@ -45,7 +45,7 @@ jobs:
       - name: Check output
         run: |
           test -f output/index.html # check output was created
-          if [ ${{ matrix.gfm }} == 'true' ]
+          if [ '${{ matrix.gfm }}' == 'true' ]
           then
             # Check that GFM was used
             grep '<p><del>Hi</del> Hello, <del>there</del> world!</p>' output/index.html
