@@ -39,6 +39,7 @@ jobs:
         with:
           destination: output
           publish: 'false'
+          tempdir: output
           gfm: ${{ matrix.gfm }}
           gfm_version: ${{ matrix.gfm_version }}
         env:
