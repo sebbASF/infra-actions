@@ -1,4 +1,5 @@
-pelican #
+# main plugins
+pelican==${PELICAN_VERSION}
 markdown #
 pelican-sitemap # pelican plugin offering
 soupsieve # needed by BeautifulSoup4

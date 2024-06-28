@@ -45,7 +45,9 @@ runs:
       run: |
         (
           test "${{ inputs.debug }}" == 'true' || exec >/dev/null
-          pip3 install pelican==${{ inputs.version }} markdown bs4 ezt requests
+          export PELICAN_VERSION=${{ inputs.version }}
+          # pip3 install pelican==${{ inputs.version }} markdown bs4 ezt requests
+          pip3 install -r ${{ github.action_path }}/requirements.txt
         )
         python3 -V
         echo "Pelican version:"
