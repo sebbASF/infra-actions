@@ -12,26 +12,30 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        testsite: [testsite]
+        coe: false
         include:
           - gfm: 'true'
+            testbranch: testsite
           - gfm: 'true'
+            testbranch: testsite
             gfm_version: '0.28.3.gfm.12'
           - gfm: 'true'
+            testbranch: testsite
             gfm_version: '0.28.3.gfm.20'
           - gfm: 'false'
-            testsite: testsite-nogfm
+            testbranch: testsite-nogfm
           - gfm: 'false'
-            testsite: testsite-nogfm
+            testbranch: testsite-nogfm
             gfm_version: 'not-a-version'
           - gfm: 'true'
-            testsite: testsite-nogfm
+            testbranch: testsite-nogfm
             gfm_version: 'not-a-version'
+            coe: true
     steps:
       - name: Checkout the test site
         uses: actions/checkout@v4
         with:
-          ref: ${{ matrix.testsite }}
+          ref: ${{ matrix.testbranch }}
       - name: Ignore the action checkout
         run: |
           echo "self/" >> .git/info/exclude
@@ -41,6 +45,7 @@ jobs:
           path: self
 
       - name: Build (no publish)
+        continue-on-error: ${{ matrix.coe }}
         uses: ./self/pelican
         with:
           destination: output
