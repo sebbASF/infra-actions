@@ -41,6 +41,8 @@ jobs:
           publish: 'false'
           gfm: ${{ matrix.gfm }}
           gfm_version: ${{ matrix.gfm_version }}
+        env:
+          UNIT_TEST_A: This is UNIT_TEST_A
 
       - name: Check output
         run: |
