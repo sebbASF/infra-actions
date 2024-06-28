@@ -61,6 +61,12 @@ jobs:
         env:
           UNIT_TEST_A: This is UNIT_TEST_A
 
+      - name: Check build failed when expected
+        if:  ${{ matrix.coe }}
+        run: |
+          echo "${{ toJSON(steps.build) }}"
+          test '${{ steps.build.outcome }}' != 'success'
+
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
         with:
