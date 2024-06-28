@@ -47,6 +47,7 @@ jobs:
       - name: Check output
         run: |
           test -f output/index.html # check output was created
+          cat output/index.html
           if [ '${{ matrix.gfm }}' == 'true' ]
           then
             # Check that GFM was used
