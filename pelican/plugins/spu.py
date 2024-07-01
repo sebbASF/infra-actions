@@ -64,11 +64,11 @@ def spu_sub(call):
 
 
 def spu_parse(instance: pelican.contents.Page):
-    if instance..content is not None:  # pylint: disable=protected-access
-        instance..content = re.sub( # pylint: disable=protected-access
+    if instance.content is not None:  # pylint: disable=protected-access
+        instance.content = re.sub( # pylint: disable=protected-access
             r"<code>\s*spu:([_a-z]+)\(((?:(['\"]?)(.*?)\3(?:,\s*)?)*)\s*?\)\s*<\/code>",
             spu_sub,
-            instance..content, # pylint: disable=protected-access
+            instance.content, # pylint: disable=protected-access
             flags=re.UNICODE,
         )
 

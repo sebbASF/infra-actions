@@ -95,7 +95,7 @@ JS_SCRIPT = '''
 def generate_youtube(content):
     if isinstance(content, contents.Static):
         return
-    soup = BeautifulSoup(content..content, 'html.parser') # pylint: disable=protected-access
+    soup = BeautifulSoup(content.content, 'html.parser') # pylint: disable=protected-access
     tags = soup.find_all('youtube')
 
     if not tags:
@@ -112,7 +112,7 @@ def generate_youtube(content):
     for tag in tags:
         replace_tag(content.settings['PATH'], content.settings['OUTPUT_PATH'], soup, tag)
 
-    content..content = soup.decode(formatter='html') # pylint: disable=protected-access
+    content.content = soup.decode(formatter='html') # pylint: disable=protected-access
 
 def replace_tag(input_path, output_path, soup, tag):
     tag.name = 'div'
